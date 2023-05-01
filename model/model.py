@@ -1,20 +1,10 @@
 from typing import Any
 
-from bark import SAMPLE_RATE, generate_audio
-from bark.generation import load_model, load_codec_model
+from bark import SAMPLE_RATE, generate_audio, preload_models
 
 import base64
 import io
 from scipy.io.wavfile import write
-
-
-def preload_models():
-    text = load_model(model_type="text", use_gpu=True, use_small=False, force_reload=False)
-    coarse = load_model(model_type="coarse", use_gpu=True, use_small=False, force_reload=False)
-    fine = load_model(model_type="fine", use_gpu=True, use_small=False, force_reload=False)
-    codec = load_codec_model(use_gpu=True, force_reload=False)
-    return { "text": text, "coarse": coarse, "fine": fine, "codec": codec }
-
 
 class Model:
     def __init__(self, **kwargs) -> None:
@@ -23,15 +13,8 @@ class Model:
         self._secrets = kwargs["secrets"]
         self._model = None
 
-
     def load(self):
-        # Load model here and assign to self._model.
-        text = load_model(model_type="text", use_gpu=True, use_small=False, force_reload=False)
-        coarse = load_model(model_type="coarse", use_gpu=True, use_small=False, force_reload=False)
-        fine = load_model(model_type="fine", use_gpu=True, use_small=False, force_reload=False)
-        codec = load_codec_model(use_gpu=True, force_reload=False)
-        self._model = { "text": text, "coarse": coarse, "fine": fine, "codec": codec }
-
+        preload_models()
 
     def preprocess(self, model_input: Any) -> Any:
         """
