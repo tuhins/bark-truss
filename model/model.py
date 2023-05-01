@@ -7,19 +7,12 @@ import io
 from scipy.io.wavfile import write
 
 class Model:
-    def __init__(self, **kwargs) -> None:
-        self._data_dir = kwargs["data_dir"]
-        self._config = kwargs["config"]
-        self._secrets = kwargs["secrets"]
-        self._model = None
-
     def load(self):
         preload_models()
 
     def predict(self, text_prompt: Any) -> Any:
         audio_array = generate_audio(text_prompt)
         return arr_to_b64(audio_array)
-
 
 def arr_to_b64(arr):
     bytes_wav = bytes()
