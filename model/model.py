@@ -16,22 +16,7 @@ class Model:
     def load(self):
         preload_models()
 
-    def preprocess(self, model_input: Any) -> Any:
-        """
-        Incorporate pre-processing required by the model if desired here.
-
-        These might be feature transformations that are tightly coupled to the model.
-        """
-        return model_input
-
-    def postprocess(self, model_output: Any) -> Any:
-        """
-        Incorporate post-processing required by the model if desired here.
-        """
-        return model_output
-
-    def predict(self, model_input: Any) -> Any:
-        text_prompt = model_input
+    def predict(self, text_prompt: Any) -> Any:
         audio_array = generate_audio(text_prompt)
         return arr_to_b64(audio_array)
 
