@@ -1,6 +1,6 @@
 bundled_packages_dir: packages
 data_dir: data
-description: null
+description: Bark is a transformer-based text-to-audio model created by Suno
 environment_variables: {}
 examples_filename: examples.yaml
 external_package_dirs: []
@@ -9,9 +9,11 @@ live_reload: false
 model_class_filename: model.py
 model_class_name: Model
 model_framework: custom
-model_metadata: {}
+model_metadata:
+  tags:
+  - text-to-speech
 model_module_dir: model
-model_name: null
+model_name: Bark
 model_type: custom
 python_version: py39
 requirements:
